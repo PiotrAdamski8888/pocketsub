@@ -4,17 +4,11 @@ import {
   SUBSCRIPTION_BILLING_PERIOD,
   SUBSCRIPTION_CURRENCY,
 } from "@prisma/client";
-import {
-  addMonths,
-  endOfMonth,
-  isBefore,
-  startOfMonth,
-} from "date-fns";
+import { addMonths, endOfMonth, isBefore, startOfMonth } from "date-fns";
 
 function randomDate(start: Date, end: Date) {
   return new Date(
-    start.getTime() +
-      Math.random() * (end.getTime() - start.getTime())
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
   );
 }
 
@@ -24,14 +18,11 @@ function getRandomDateInCurrentMonth() {
   const end = endOfMonth(now);
 
   return new Date(
-    start.getTime() +
-      Math.random() * (end.getTime() - start.getTime())
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
   );
 }
 
-function nextPaymentMonthGenerator(
-  billingPeriod: SUBSCRIPTION_BILLING_PERIOD
-) {
+function nextPaymentMonthGenerator(billingPeriod: SUBSCRIPTION_BILLING_PERIOD) {
   switch (billingPeriod) {
     case SUBSCRIPTION_BILLING_PERIOD.QUARTERLY:
       return 3;
@@ -45,7 +36,7 @@ function nextPaymentMonthGenerator(
 async function main() {
   const user = await prisma.user.upsert({
     where: {
-      email: "daniel.noworyta@gmail.com",
+      email: "piotr.a8888@gmail.com",
     },
     update: {
       subscriptions: {
@@ -166,8 +157,8 @@ async function main() {
     },
     create: {
       id: "test123",
-      email: "daniel.noworyta@gmail.com",
-      name: "Daniel Noworyta",
+      email: "piotr.a8888@gmail.com",
+      name: "Piotr Adamski",
       subscriptions: {
         create: [
           {
@@ -312,9 +303,7 @@ async function main() {
             status === PAYMENT_STATUS.PAID
               ? addMonths(
                   due_date,
-                  nextPaymentMonthGenerator(
-                    subscription.billing_period
-                  )
+                  nextPaymentMonthGenerator(subscription.billing_period)
                 )
               : due_date,
         },
