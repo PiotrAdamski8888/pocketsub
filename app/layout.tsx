@@ -1,10 +1,8 @@
-import type { Metadata } from "next";
-
 import "./globals.css";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Pocketsub",
-  description: "Mansge your payments with ease.",
+  description: "Manage your payments with ease.",
 };
 
 export default function RootLayout({
